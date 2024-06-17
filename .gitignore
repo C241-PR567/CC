@@ -1,3 +1,5 @@
 /node_modules
 .env
 package-lock.json
+db-config/serviceAccount.json
+db-config/gcp-service-account.json
