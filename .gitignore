@@ -3,3 +3,4 @@
 package-lock.json
 db-config/serviceAccount.json
 db-config/gcp-service-account.json
+src/getIdToken.js
