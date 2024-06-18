@@ -1,15 +1,14 @@
-import * as tf from '@tensorflow/tfjs-node';
 import InputError from '../exceptions/InputError.js';
+import getDiseaseDescription from './getDiseaseDescription.js'
+import * as tf from '@tensorflow/tfjs-node';
 
-// Definisi regularizer L2
 class L2 {
   static className = 'L2';
   constructor(l2) { this.l2 = l2; }
   apply(w) { return tf.mul(tf.scalar(this.l2), tf.sum(tf.square(w))); }
-  getConfig() { return {l2: this.l2}; }
+  getConfig() { return { l2: this.l2 }; }
 }
 tf.serialization.registerClass(L2);
-
 
 async function predictClassification(model, image) {
   try {
@@ -36,11 +35,17 @@ async function predictClassification(model, image) {
     const score = await prediction.data();
     const confidenceScore = Math.max(...score) * 100;
 
-    const classes = ['acne', 'actinic', 'Basal Cell Carcinoma', 'Eczemaa', 'Rosacea'];
+    const classes = ['acne', 'actinic', 'basal cell carcinoma', 'eczema', 'rosacea'];
     const classResult = tf.argMax(prediction, 1).dataSync()[0];
-    const label = classes[classResult];
+    const label = classes[classResult].toLowerCase(); // Ubah label menjadi huruf kecil
 
-    return { confidenceScore, label };
+    console.log(`Predicted label: ${label}`);
+    
+    // Ambil deskripsi penyakit dari Firestore
+    const description = await getDiseaseDescription(label);
+    console.log(`Deskripsi yang diambil: ${description}`);
+
+    return { confidenceScore, label, description };
   } catch (error) {
     console.error(`Error during prediction: ${error.message}`);
     throw new InputError(`Input error: ${error.message}`);

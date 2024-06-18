@@ -143,14 +143,14 @@ export const uploadProfilePicture = async (req, res) => {
 //Predict Disease Handler
 export const predictDisease = async (req, res) => {
     try {
-        //cek apakah ada file
+        // Cek apakah ada file yang diupload
         if (!req.file) {
             return res.status(400).send('No file uploaded.');
         }
 
         const imageFile = req.file;
-        const uid = req.uid; // mendapatkan UID dari middleware
-        // cek apakah uid ada
+        const uid = req.uid; // Dapatkan UID dari middleware
+        // Periksa apakah UID ada
         if (!uid) {
             return res.status(400).send('User ID is required.');
         }
@@ -159,7 +159,7 @@ export const predictDisease = async (req, res) => {
         const bucket = gcs.bucket(imageBucketName);
         const fileUpload = bucket.file(fileName);
 
-        //membuat stream upload
+        // Buat stream upload
         const stream = fileUpload.createWriteStream({
             metadata: { contentType: imageFile.mimetype }
         });
@@ -171,21 +171,29 @@ export const predictDisease = async (req, res) => {
 
         stream.on('finish', async () => {
             try {
-                // Mendapatkan url dari image
+                // Dapatkan URL gambar dari GCS
                 const [url] = await fileUpload.getSignedUrl({ action: 'read', expires: '01-01-2025' });
 
-                // Download gambar dari GCS
+                // Unduh gambar dari URL
                 const response = await axios.get(url, { responseType: 'arraybuffer' });
                 const imageBuffer = Buffer.from(response.data, 'binary');
 
-                // melakukan prediksi
+                // Lakukan prediksi
                 const prediction = await predictClassification(model, imageBuffer);
                 const predictionId = `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-                // menyimpan hasil prediksi ke Firestore
+                // Simpan hasil prediksi ke Firestore
                 await storeData(predictionId, { ...prediction, imageUrl: url, userId: uid });
 
-                res.status(200).json({ url, prediction });
+                // Kembalikan respons dengan detail prediksi
+                res.status(200).json({
+                  url,
+                  prediction: {
+                    confidenceScore: prediction.confidenceScore,
+                    label: prediction.label,
+                    description: prediction.description 
+                  }
+                });
             } catch (error) {
                 console.error('Error during prediction:', error);
                 res.status(500).send('Internal Server Error');

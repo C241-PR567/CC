@@ -1,0 +1,20 @@
+BASE_URL=https://cc-api-r3cyuioxiq-et.a.run.app/
+
+routes:
+// Rute untuk signup
+router.post('/signup', signUp);
+
+// Rute untuk signin
+router.post('/signin', signIn);
+
+// Rute untuk signout
+router.post('/signout', signOutUser);
+
+// Rute untuk reset password
+router.post('/reset-password', resetPassword);
+
+// Rute untuk mengunggah gambar profil
+router.post('/upload-profile-picture', verifyAuth, upload.single('image'), uploadProfilePicture);
+
+// Rute untuk prediksi penyakit
+router.post('/predict', verifyAuth, upload.single('image'), predictDisease);
