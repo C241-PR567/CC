@@ -1,1 +1,9 @@
-runtime: nodejs20
+runtime: nodejs20  # Ganti dengan versi Node.js yang Anda gunakan
+
+env_variables:
+  PORT: 8080  # Sesuaikan dengan port yang digunakan oleh aplikasi Anda
+
+handlers:
+- url: /.*
+  script: auto
+  secure: always
