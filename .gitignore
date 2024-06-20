@@ -3,3 +3,4 @@ package-lock.json
 backend.txt
 db-config/gcp-service-account.json
 db-config/serviceAccount.json
+.env
