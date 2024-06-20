@@ -5,7 +5,7 @@
 #### (CC) C370D4KX0390-Zulfa Hana Aqliyah-STMIK IKMI Cirebon 
 #### (CC) C007D4KY0480-Kaonang Sigit Prakoso-Universitas Dian Nuswantoro
 #### (MD) A152D4KX4047-Triyanti Dwi Aryanti-Sekolah Tinggi Teknologi Bandung
-## API Documentation
+# API Documentation
 This document provides information on how to use the API endpoints and their functionalities.
 ## Setup Project
 To run this project, install it locally using npm on your pc
@@ -67,7 +67,7 @@ export { auth, db };
 
 # run the backend using `npm start` or if you want to use dev environment you can hit `npm run dev`
 ```
-## Recap Endpoint Routes
+# Recap Endpoint Routes
 
 |     Route               | HTTP Method   | Description                                  |
 |:------------------------|:--------------|:---------------------------------------------|
@@ -78,6 +78,145 @@ export { auth, db };
 | /upload-profile-picture | POST          | Upload a profile picture for a user          |
 | /predict                | POST          | Perform a prediction using an uploaded image |
 | /list                   | GET           | Get all list                                 |
+
+# Endpoints 
+## POST /signup
+
+Create a new user account.
+
+#### Request
+
+* Method: POST
+* Path: /signup
+* Body Parameters:
+```sh
+  {
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "phone": "1234567890",
+    "password": "password123"
+  }
+```
+#### Response
+
+* Success (HTTP 200):
+
+    * success (boolean): true
+    * msg (string): "Berhasil SignUp, silakan SignIn"
+
+* Failure (HTTP 400):
+
+    * success (boolean): false
+    * msg (string): "Email sudah terdaftar"
+
+## POST /signin
+
+Authenticate and sign in a user.
+
+#### Request
+
+* Method: POST
+* Path: /signin
+* Body Parameters:
+```sh
+{
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+```
+
+#### Response
+
+* Success (HTTP 200):
+
+    * success (boolean): true
+    * msg (string): "Berhasil Sign In"
+    * data (object):
+        * uid (string): User's unique ID.
+        * email (string): User's email address.
+* Failure (HTTP 404):
+
+    * success (boolean): false
+    * msg (string): "Error melakukan Sign In"
+ 
+      
+## POST /reset-password
+
+Send a password reset email to the user.
+
+#### Request
+
+* Method: POST
+* Path: /reset-password
+* Body Parameters:
+```sh
+{
+  "email": "johndoe@example.com"
+}
+```
+#### Response
+
+* Success (HTTP 200):
+
+    * msg (string): "Link Reset Password Telah Dikirim Ke Email"
+      
+* Failure (HTTP 200):
+  
+    * msg (string): "Error melakukan reset password"
+  
+## POST /Signout
+
+Sign out the currently authenticated user.
+
+#### Request
+
+* Method: POST
+* Path: /Signout
+#### Response
+
+* Success (HTTP 200):
+
+    * msg (string): "Sign out Berhasil"
+* Failure (HTTP 500):
+
+    * msg (string): "Gagal Melakukan Sign Out"
+
+## POST /predict
+
+Upload an image file for prediction.
+
+#### Request
+
+* Method: POST
+* Path: /predict
+* Body Parameters:
+    * image (file): Image file to be uploaded.
+#### Response
+
+* Success (HTTP 200):
+    * status (string): "Success"
+    * message (string): "Profile picture berhasil ditambahkan"
+    * fileName (string): Name of the uploaded file.
+    * url (string): Public URL of the uploaded file.
+    * file (file): JSON file containing additional information.
+## POST /upload-profile-picture
+
+Upload a profile picture image file.
+
+#### Request
+
+* Method: POST
+* Path: /upload-profile-picture
+* Body Parameters:
+    * image (file): Image file to be uploaded.
+#### Response
+
+* Success (HTTP 200):
+    * status (string): "Success"
+    * message (string): "Profile picture berhasil ditambahkan"
+    * fileName (string): Name of the uploaded file.
+    * url (string): Public URL of the uploaded file.
+    * file (file): JSON file containing additional information.
 
  
 
