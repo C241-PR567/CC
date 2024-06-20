@@ -233,6 +233,43 @@ Upload a profile picture image file.
     * log : Error getting list
     * msg (string): "Terjadi kesalahan, tunggu beberapa saat"
 
+#### Example JSON Data Response
+```sh
+{
+    "diseases": [
+        {
+            "id": "acne",
+            "description": "Acne atau jerawat adalah kondisi kulit yang umum terjadi akibat pori-pori tersumbat oleh minyak berlebih, sel kulit mati, dan bakteri, yang menyebabkan timbulnya benjolan kecil seperti komedo, papul, atau pustul. Penyebab utama acne meliputi produksi minyak berlebih oleh kelenjar sebaceous, penumpukan sel kulit mati, bakteri, serta perubahan hormon. Untuk menangani acne, penting untuk menjaga kebersihan kulit dengan mencuci muka secara teratur, menghindari memencet jerawat, dan menggunakan produk perawatan kulit yang sesuai atau obat-obatan seperti benzoyl peroxide atau asam salisilat. Jika acne parah, konsultasi dengan dokter kulit dianjurkan untuk mendapatkan penanganan lebih lanjut",
+            "name": "acne",
+            "image": "https://firebasestorage.googleapis.com/v0/b/capstone-project-c241-pr567/o/acne.jpg?alt=media&token=d02a0584-9f0d-4990-bb97-ea7f8336bf04"
+        },
+        {
+            "id": "actinic",
+            "name": "actinic",
+            "image": "https://firebasestorage.googleapis.com/v0/b/capstone-project-c241-pr567/o/actinic.jpg?alt=media&token=1bde3959-56d0-4fa1-a90a-272d0f1cdfac",
+            "description": "Actinic Keratosis adalah bercak kasar atau bersisik pada kulit yang sering terkena sinar matahari, seperti wajah dan tangan. Bercak ini bisa terasa gatal atau perih dan perlu diperhatikan karena dapat berkembang menjadi kanker kulit. Penyebab utama penyakit ini adalah adalah paparan sinar ultraviolet (UV) berlebih dari matahari atau tanning beds yang merusak sel kulit."
+        },
+        {
+            "id": "basal cell carnioma",
+            "name": "basal cell carcinoma",
+            "description": "Basal Cell Carcinoma adalah jenis kanker kulit yang paling umum, sering muncul sebagai benjolan merah muda atau bercak bersisik yang tidak sembuh-sembuh pada area kulit yang sering terpapar sinar matahari. Penyebabnya adalah paparan sinar UV yang berulang-ulang, yang menyebabkan kerusakan DNA pada sel kulit.",
+            "image": "https://firebasestorage.googleapis.com/v0/b/capstone-project-c241-pr567/o/basal%20cell%20carnioma.jpg?alt=media&token=7b23ef56-4cfc-4cfc-8d53-d3a4af734647"
+        },
+        {
+            "id": "eczema",
+            "description": "Eczema adalah kondisi kulit yang menyebabkan peradangan dan gatal-gatal, serta munculnya ruam kemerahan yang bisa menjadi bersisik atau berkerak, sering muncul di tangan, leher, dan belakang lutut. Penyebabnya meliputi faktor genetik, respons kekebalan tubuh yang berlebihan, dan paparan terhadap iritan atau alergen seperti sabun dan stres.",
+            "image": "https://firebasestorage.googleapis.com/v0/b/capstone-project-c241-pr567/o/eczemaa.jpg?alt=media&token=8f8324d2-6a09-41de-9f7b-851e2d7fa0fe",
+            "name": "eczema"
+        },
+        {
+            "id": "rosacea",
+            "image": "https://firebasestorage.googleapis.com/v0/b/capstone-project-c241-pr567/o/rosacea.jpg?alt=media&token=a190f0a0-6b31-4e48-95ca-0d0196b39746",
+            "name": "rosacea",
+            "description": "Rosacea adalah kondisi kulit kronis yang menyebabkan kemerahan pada wajah, pembuluh darah yang terlihat jelas, dan sering kali disertai dengan benjolan kecil mirip jerawat. Rosacea adalah kondisi kulit kronis yang menyebabkan kemerahan pada wajah, pembuluh darah yang terlihat jelas, dan sering kali disertai dengan benjolan kecil mirip jerawat."
+        }
+    ]
+}
+```
  
 
 
