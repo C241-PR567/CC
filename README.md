@@ -219,9 +219,9 @@ Upload a profile picture image file.
     * url (string): Public URL of the uploaded file.
     * file (file): JSON file containing additional information.
 
-## GET /list
+## GET /list-diseases
 * Method: GET
-* Path: /list
+* Path: /list-diseases
 * Body Parameters: none
 
 #### Response
@@ -271,7 +271,32 @@ Upload a profile picture image file.
     ]
 }
 ```
- 
 
+## GET /list-diseases/:id
+* Method: GET
+* Path: /list-diseases/:id
+* Body Parameters: none
+
+#### Response
+
+* Success (HTTP 200):
+    * success (boolean): true
+    * msg (string): "Berhasil"
+* Error (HTTP 500):
+    * success (boolean): false
+    * log : Error getting list
+    * msg (string): "Terjadi kesalahan, tunggu beberapa saat"
+
+#### Example JSON Data Response
+```sh
+
+{
+     {
+            "id": "acne",
+            "description": "Acne atau jerawat adalah kondisi kulit yang umum terjadi akibat pori-pori tersumbat oleh minyak berlebih, sel kulit mati, dan bakteri, yang menyebabkan timbulnya benjolan kecil seperti komedo, papul, atau pustul. Penyebab utama acne meliputi produksi minyak berlebih oleh kelenjar sebaceous, penumpukan sel kulit mati, bakteri, serta perubahan hormon. Untuk menangani acne, penting untuk menjaga kebersihan kulit dengan mencuci muka secara teratur, menghindari memencet jerawat, dan menggunakan produk perawatan kulit yang sesuai atau obat-obatan seperti benzoyl peroxide atau asam salisilat. Jika acne parah, konsultasi dengan dokter kulit dianjurkan untuk mendapatkan penanganan lebih lanjut",
+            "name": "acne",
+            "image": "https://firebasestorage.googleapis.com/v0/b/capstone-project-c241-pr567/o/acne.jpg?alt=media&token=d02a0584-9f0d-4990-bb97-ea7f8336bf04"
+        }
+}
 
 
