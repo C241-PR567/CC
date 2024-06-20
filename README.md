@@ -12,6 +12,7 @@ To run this project, install it locally using npm on your pc
 ```sh
 # Clone repository
 https://github.com/C241-PR567/CC.git
+
 # change directory to Skin Aja
 $ cd CC
 ```
