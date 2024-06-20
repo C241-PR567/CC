@@ -78,7 +78,9 @@ export { auth, db };
 | /reset-password         | POST          | Reset user's password                        |
 | /upload-profile-picture | POST          | Upload a profile picture for a user          |
 | /predict                | POST          | Perform a prediction using an uploaded image |
-| /list                   | GET           | Get all list                                 |
+| /list-diseases          | GET           | Get all list skin diseases                   |
+| /list-diseases/:id      | GET           | Get a skin disease by id                   |
+
 
 # Endpoints 
 ## POST /signup
