@@ -11,6 +11,9 @@ This document provides information on how to use the API endpoints and their fun
 To run this project, install it locally using npm on your pc
 ```sh
 # Clone repository
-git clone https://github.com/username/proyek.git
+git clone https://github.com/username/proyek.git](https://github.com/C241-PR567/CC.git
+# change directory to server-API-xdetect
+$ cd server-API-xdetect
+
 
 
