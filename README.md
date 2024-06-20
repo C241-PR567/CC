@@ -12,7 +12,7 @@ To run this project, install it locally using npm on your pc
 ```sh
 # Clone repository
 git clone https://github.com/username/proyek.git](https://github.com/C241-PR567/CC.git
-# change directory to server-API-xdetect
+# change directory to Skin Aja
 $ cd CC
 ```
 Please go to Google Cloud Console and create a service account with permissions for both Storage Object Admin and Storage Object Viewer
