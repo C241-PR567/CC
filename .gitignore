@@ -1,4 +1,5 @@
 /node_modules
 package-lock.json
+backend.txt
 db-config/gcp-service-account.json
 db-config/serviceAccount.json

@@ -1,5 +1,5 @@
 import express from 'express';
-import { signUp, signIn, signOutUser, resetPassword, uploadProfilePicture, predictDisease } from './handler.js';
+import { signUp, signIn, signOutUser, resetPassword, uploadProfilePicture, predictDisease, getDiseaseList, getDiseaseById } from './handler.js';
 import multer from 'multer';
 import { verifyAuth } from './authMiddleware.js';
 import { getIdToken } from 'firebase/auth';
@@ -30,5 +30,10 @@ router.post('/upload-profile-picture', verifyAuth, upload.single('image'), uploa
 // Rute untuk prediksi penyakit
 router.post('/predict', verifyAuth, upload.single('image'), predictDisease);
 
+// Rute untuk list penyakit
+router.get('/list-diseases', getDiseaseList);
+
+//Rute untuk menampilkan detail dari penyakit
+router.get('/list-diseases/:id', getDiseaseById);
 
 export default router;

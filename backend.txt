@@ -1,20 +1,26 @@
-BASE_URL=https://cc-api-r3cyuioxiq-et.a.run.app/
+BASE_URL=https://cc-api-r3cyuioxiq-et.a.run.app
 
 routes:
 // Rute untuk signup
-router.post('/signup', signUp);
+https://cc-api-r3cyuioxiq-et.a.run.app/signup
 
 // Rute untuk signin
-router.post('/signin', signIn);
+https://cc-api-r3cyuioxiq-et.a.run.app/signin
 
 // Rute untuk signout
-router.post('/signout', signOutUser);
+https://cc-api-r3cyuioxiq-et.a.run.app/signout
 
 // Rute untuk reset password
-router.post('/reset-password', resetPassword);
+https://cc-api-r3cyuioxiq-et.a.run.app/reset-password
 
 // Rute untuk mengunggah gambar profil
-router.post('/upload-profile-picture', verifyAuth, upload.single('image'), uploadProfilePicture);
+https://cc-api-r3cyuioxiq-et.a.run.app/upload-profile-picture
 
 // Rute untuk prediksi penyakit
-router.post('/predict', verifyAuth, upload.single('image'), predictDisease);
+https://cc-api-r3cyuioxiq-et.a.run.app/predict
+
+// Rute untuk list penyakit
+https://cc-api-r3cyuioxiq-et.a.run.app/list-diseases
+
+//Rute untuk menampilkan detail dari penyakit
+https://cc-api-r3cyuioxiq-et.a.run.app/list-diseases/:id

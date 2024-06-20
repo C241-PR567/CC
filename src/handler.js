@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from "firebase/auth";
-import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc, collection, getDocs, getDoc } from 'firebase/firestore';
 import { db, auth, admin } from "../db-config/firebase-config.js"; 
 import { Storage } from '@google-cloud/storage';
 import axios from 'axios';
@@ -51,15 +51,35 @@ export const signUp = async (req, res) => {
 
 
 export const signIn = async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        //sign in dengan email dan password
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        res.json({ success: true, msg: 'Berhasil Sign In', data: { uid: user.uid, email: user.email } });
-    } catch (error) {
-        res.status(404).json({ success: false, msg: 'Error melakukan Sign In' });
-    }
+  const { name, email, password } = req.body;
+  try {
+      // Sign in dengan email dan password
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Ambil data user dari Firestore
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+
+          // Verifikasi nama
+          if (userData.name !== name) {
+              return res.status(400).json({ success: false, msg: 'Nama tidak cocok' });
+          }
+
+          // memperbarui timestamp login terakhir
+          await setDoc(userDocRef, { lastLogin: new Date() }, { merge: true });
+
+          res.json({ success: true, msg: 'Berhasil Sign In', data: { uid: user.uid, email: user.email, name: userData.name } });
+      } else {
+          res.status(404).json({ success: false, msg: 'User tidak ditemukan' });
+      }
+  } catch (error) {
+    console.error('Error during sign in:', error);
+      res.status(404).json({ success: false, msg: 'Error melakukan Sign In' });
+  }
 };
 
 // Handler signout
@@ -206,3 +226,51 @@ export const predictDisease = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+
+// Fungsi untuk mendapatkan daftar penyakit dari Firestore
+export const getDiseaseList = async (req, res) => {
+    try {
+        const diseasesCollection = collection(db, 'db-diseases');
+        const diseasesSnapshot = await getDocs(diseasesCollection);
+        const diseaseList = diseasesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+        res.status(200).json({ diseases: diseaseList });
+    } catch (error) {
+        console.error('Error fetching disease list:', error);
+        res.status(500).json({ msg: 'Error fetching disease list' });
+    }
+};
+
+//untuk mendapatkan detail dari penyakit
+export const getDiseaseById = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      console.log(`Fetching disease with id: ${id}`);
+      const diseaseDoc = doc(db, 'db-diseases', id);
+      const docSnap = await getDoc(diseaseDoc);
+  
+      if (docSnap.exists()) {
+        const diseaseData = docSnap.data();
+        console.log(`Disease data found: ${JSON.stringify(diseaseData)}`);
+  
+        res.status(200).json({
+          success: true,
+          msg: 'Berhasil',
+          data: diseaseData,
+        });
+      } else {
+        console.log(`No disease found with id: ${id}`);
+        res.status(404).json({
+          success: false,
+          msg: 'Penyakit tidak ditemukan',
+        });
+      }
+    } catch (error) {
+      console.log('Error getting disease:', error);
+      res.status(500).json({
+        success: false,
+        msg: 'Terjadi kesalahan, tunggu beberapa saat',
+      });
+    }
+  };
