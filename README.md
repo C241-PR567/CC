@@ -218,6 +218,21 @@ Upload a profile picture image file.
     * url (string): Public URL of the uploaded file.
     * file (file): JSON file containing additional information.
 
+## GET /list
+* Method: GET
+* Path: /list
+* Body Parameters: none
+
+#### Response
+
+* Success (HTTP 200):
+    * success (boolean): true
+    * msg (string): "Berhasil"
+* Error (HTTP 500):
+    * success (boolean): false
+    * log : Error getting list
+    * msg (string): "Terjadi kesalahan, tunggu beberapa saat"
+
  
 
 
