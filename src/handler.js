@@ -49,9 +49,9 @@ export const signUp = async (req, res) => {
     }
 };
 
-
+//Handler signin
 export const signIn = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { email, password } = req.body;
   try {
       // Sign in dengan email dan password
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -63,11 +63,6 @@ export const signIn = async (req, res) => {
 
       if (userDocSnap.exists()) {
           const userData = userDocSnap.data();
-
-          // Verifikasi nama
-          if (userData.name !== name) {
-              return res.status(400).json({ success: false, msg: 'Nama tidak cocok' });
-          }
 
           // memperbarui timestamp login terakhir
           await setDoc(userDocRef, { lastLogin: new Date() }, { merge: true });
